@@ -504,6 +504,9 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     SAVEHIST=200000
 
     setopt hist_ignore_space
+
+    # disables the su='sudo su' alias
+    HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
 fi
 
 # Colors on GNU ls(1)
@@ -2843,7 +2846,7 @@ if [[ -r /etc/debian_version ]] ; then
     fi
 
     # get a root shell as normal user in live-cd mode:
-    if isgrmlcd && [[ $UID -ne 0 ]] ; then
+    if isgrmlcd && [[ $UID -ne 0 ]] && [[ -z "$HW_CONF_NO_SUDO_SU" ]] ; then
        alias su="sudo su"
     fi
 
