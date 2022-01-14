@@ -493,6 +493,19 @@ ZSH_NO_DEFAULT_LOCALE=${ZSH_NO_DEFAULT_LOCALE:-0}
 typeset -ga ls_options
 typeset -ga grep_options
 
+# HW_CONF
+HW_CONF_DEFAULTS=${HW_CONF_DEFAULTS:-1}
+
+if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
+    #WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
+    WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+    GRML_NO_APT_ALIASES=1
+    HISTSIZE=300000
+    SAVEHIST=200000
+
+    setopt hist_ignore_space
+fi
+
 # Colors on GNU ls(1)
 if ls --color=auto / >/dev/null 2>&1; then
     ls_options+=( --color=auto )
