@@ -508,6 +508,7 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     # the HW_CONF_ALIASES_* only take effect if this is enabled
     HW_CONF_ALIASES=${HW_CONF_ALIASES:-1}
     HW_CONF_ALIASES_GIT=${HW_CONF_ALIASES_GIT:-1}
+    HW_CONF_ALIASES_IPROUTE=${HW_CONF_ALIASES_IPROUTE:-1}
     # disables the su='sudo su' alias
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
     # uses exa for aliases instead of ls if exa exists
@@ -2734,6 +2735,13 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
     alias gup='git pull --rebase=merges'
 fi
 
+if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
+    alias ip="command ip --color=auto "
+    alias ipb="command ip --color=auto --brief "
+    alias ip6="command ip --color=auto --family inet6 "
+    alias ip6b="command ip --color=auto --family inet6 --brief "
+fi
+
 if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
     alias l="command exa -l "
     alias la="command exa -la "
@@ -2764,9 +2772,11 @@ else
     alias l='command ls -l'
 fi
 
+if [[ ! ( -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ) ]]; then
 # use ip from iproute2 with color support
 if ip --color=auto addr show dev lo >/dev/null 2>&1; then
     alias ip='command ip --color=auto'
+fi
 fi
 
 if [[ -r /proc/mdstat ]]; then
