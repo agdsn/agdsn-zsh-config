@@ -507,6 +507,8 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
 
     # disables the su='sudo su' alias
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
+    # uses exa for aliases instead of ls if exa exists
+    HW_CONF_USE_EXA=${HW_CONF_USE_EXA:-1}
 fi
 
 # Colors on GNU ls(1)
@@ -2674,8 +2676,19 @@ if check_com -c screen ; then
     fi
 fi
 
+if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
+    alias l="command exa -l "
+    alias la="command exa -la "
+    alias lh="command exa -l "
+    alias lt="command exa -lT "
+    alias lts="command exa -T "
+    alias ltd="command exa -lTD "
+    alias ltds="command exa -TD "
+    alias lg="command exa -l --git "
+    alias lgit="command exa -l --git --git-ignore --tree "
+
 # do we have GNU ls with color-support?
-if [[ "$TERM" != dumb ]]; then
+elif [[ "$TERM" != dumb ]]; then
     #a1# List files with colors (\kbd{ls \ldots})
     alias ls="command ls ${ls_options:+${ls_options[*]}}"
     #a1# List all files, with colors (\kbd{ls -la \ldots})
