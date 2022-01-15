@@ -2748,8 +2748,8 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
 
     alias glog='git log --oneline --decorate --graph'
     alias gloga='git log --oneline --decorate --graph --all'
-    alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
-    alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all "
+    alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
     alias gst='git status'
     alias gss='git status --short'
@@ -2777,10 +2777,10 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
-    alias ip="command ip --color=auto "
-    alias ipb="command ip --color=auto --brief "
-    alias ip6="command ip --color=auto --family inet6 "
-    alias ip6b="command ip --color=auto --family inet6 --brief "
+    alias ip="command ip --color=auto"
+    alias ipb="command ip --color=auto --brief"
+    alias ip6="command ip --color=auto --family inet6"
+    alias ip6b="command ip --color=auto --family inet6 --brief"
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
@@ -2889,15 +2889,15 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
 fi
 
 if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
-    alias l="command exa -l "
-    alias la="command exa -la "
-    alias lh="command exa -l "
-    alias lt="command exa -lT "
-    alias lts="command exa -T "
-    alias ltd="command exa -lTD "
-    alias ltds="command exa -TD "
-    alias lg="command exa -l --git "
-    alias lgit="command exa -l --git --git-ignore --tree "
+    alias l="command exa -l"
+    alias la="command exa -la"
+    alias lh="command exa -l"
+    alias lt="command exa -lT"
+    alias lts="command exa -T"
+    alias ltd="command exa -lTD"
+    alias ltds="command exa -TD"
+    alias lg="command exa -l --git"
+    alias lgit="command exa -l --git --git-ignore --tree"
 
 # do we have GNU ls with color-support?
 elif [[ "$TERM" != dumb ]]; then
