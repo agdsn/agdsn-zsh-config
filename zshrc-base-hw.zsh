@@ -512,6 +512,8 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     HW_CONF_ALIASES_SYSTEMD=${HW_CONF_ALIASES_SYSTEMD:-1}
     # disables complicated and unintuitive ls aliases
     HW_CONF_DISABLE_ADVANCED_LS_ALIASES=${HW_CONF_DISABLE_ADVANCED_LS_ALIASES:-1}
+    # configures the hw prompt as the default
+    HW_CONF_HW_PROMPT=${HW_CONF_HW_PROMPT:-1}
     # disables the su='sudo su' alias
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
     # uses exa for aliases instead of ls if exa exists
@@ -2196,6 +2198,10 @@ function prompt_grml-large_setup () {
     grml_prompt_setup grml-large
 }
 
+function prompt_hw_setup () {
+    grml_prompt_setup hw
+}
+
 # These maps define default tokens and pre-/post-decoration for items to be
 # used within the themes. All defaults may be customised in a context sensitive
 # matter by using zsh's `zstyle' mechanism.
@@ -2501,6 +2507,35 @@ function prompt_grml-large_precmd () {
     prompt_grml_precmd_worker
 }
 
+function hw_ip_netns_prompt () {
+    local NETNS=$(command ip netns identify)
+    if [[ -n "$NETNS" ]]; then
+        # the variables are not existent when this prompt is displayed
+        # local PROMPT="${MAGENTA}<${NO_COLOR}netns${YELLOW}:${GREEN}${NETNS}${MAGENTA}>${NO_COLOR} "
+        local PROMPT="%F{magenta}<%fnetns%F{yellow}:%F{green}${NETNS}%F{magenta}>%f "
+        REPLY="${PROMPT}"
+    else
+        REPLY=''
+    fi
+}
+
+function virtual_env_prompt () {
+    REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
+}
+
+grml_theme_add_token ip-netns -f hw_ip_netns_prompt '' ''
+grml_theme_add_token virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
+
+function prompt_hw_precmd () {
+    emulate -L zsh
+    local grmltheme=hw
+    local -a left_items right_items
+    left_items=(rc ip-netns virtual-env change-root time user at host path vcs percent)
+    right_items=(sad-smiley)
+
+    prompt_grml_precmd_worker
+}
+
 function prompt_grml_precmd_worker () {
     emulate -L zsh
     local -i vcscalled=0
@@ -2530,6 +2565,7 @@ if zrcautoload promptinit && promptinit 2>/dev/null ; then
     # $fpath, we need to stick the theme's name into `$prompt_themes'
     # ourselves, since promptinit does not pick them up otherwise.
     prompt_themes+=( grml grml-chroot grml-large )
+    prompt_themes+=( hw )
     # Also, keep the array sorted...
     prompt_themes=( "${(@on)prompt_themes}" )
 else
@@ -2559,7 +2595,9 @@ if is437; then
     fi
 
     # Finally enable one of the prompts.
-    if [[ -n $GRML_CHROOT ]]; then
+    if [[ -n "$HW_CONF_HW_PROMPT" ]]; then
+        prompt hw
+    elif [[ -n $GRML_CHROOT ]]; then
         prompt grml-chroot
     elif [[ $GRMLPROMPT -gt 0 ]]; then
         prompt grml-large
