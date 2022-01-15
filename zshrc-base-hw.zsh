@@ -510,6 +510,8 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     HW_CONF_ALIASES_GIT=${HW_CONF_ALIASES_GIT:-1}
     HW_CONF_ALIASES_IPROUTE=${HW_CONF_ALIASES_IPROUTE:-1}
     HW_CONF_ALIASES_SYSTEMD=${HW_CONF_ALIASES_SYSTEMD:-1}
+    # disables complicated and unintuitive ls aliases
+    HW_CONF_DISABLE_ADVANCED_LS_ALIASES=${HW_CONF_DISABLE_ADVANCED_LS_ALIASES:-1}
     # disables the su='sudo su' alias
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
     # uses exa for aliases instead of ls if exa exists
@@ -3536,6 +3538,7 @@ esac
 #a2# Execute \kbd{du -sch}
 [[ -n "$GRML_NO_SMALL_ALIASES" ]] || alias da='du -sch'
 
+if [[ ! ( -n "$HW_CONF_DISABLE_ADVANCED_LS_ALIASES" ) ]]; then
 # listing stuff
 #a2# Execute \kbd{ls -lSrah}
 alias dir="command ls -lSrah"
@@ -3567,6 +3570,7 @@ alias lssmall="command ls -Srl *(.oL[1,10])"
 alias lsnewdir="command ls -rthdl *(/om[1,10]) .*(D/om[1,10])"
 #a2# Display the ten oldest directories and ten oldest .directories
 alias lsolddir="command ls -rthdl *(/Om[1,10]) .*(D/Om[1,10])"
+fi
 
 # some useful aliases
 #a2# Remove current empty directory. Execute \kbd{cd ..; rmdir \$OLDCWD}
