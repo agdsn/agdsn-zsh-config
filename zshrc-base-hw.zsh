@@ -2868,20 +2868,20 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
     done
 
     for c in $sudo_commands; do
-      alias "sc-$c"="sudo systemctl $c"
+      salias "sc-$c"="systemctl $c"
       alias "scu-$c"="systemctl --user $c"
     done
 
     for c in $power_commands; do
-      alias "sc-$c"="systemctl $c"
+      salias "sc-$c"="systemctl $c"
     done
 
     unset c user_commands sudo_commands power_commands
 
     # --now commands
-    alias sc-enable-now="sc-enable --now"
-    alias sc-disable-now="sc-disable --now"
-    alias sc-mask-now="sc-mask --now"
+    salias sc-enable-now="sc-enable --now"
+    salias sc-disable-now="sc-disable --now"
+    salias sc-mask-now="sc-mask --now"
 
     alias scu-enable-now="scu-enable --now"
     alias scu-disable-now="scu-disable --now"
