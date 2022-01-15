@@ -509,6 +509,7 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     HW_CONF_ALIASES=${HW_CONF_ALIASES:-1}
     HW_CONF_ALIASES_GIT=${HW_CONF_ALIASES_GIT:-1}
     HW_CONF_ALIASES_IPROUTE=${HW_CONF_ALIASES_IPROUTE:-1}
+    HW_CONF_ALIASES_SYSTEMD=${HW_CONF_ALIASES_SYSTEMD:-1}
     # disables the su='sudo su' alias
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
     # uses exa for aliases instead of ls if exa exists
@@ -2740,6 +2741,111 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
     alias ipb="command ip --color=auto --brief "
     alias ip6="command ip --color=auto --family inet6 "
     alias ip6b="command ip --color=auto --family inet6 --brief "
+fi
+
+if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
+    function listd() {
+        local BOLD="\e[01m"
+        echo -e "${BOLD}${RED} --> SYSTEM LEVEL <--${NO_COLOR}"
+        tree /etc/systemd/system
+        [[ -d "$HOME"/.config/systemd/user ]] &&
+            (echo -e "${BOLD}${RED} --> USER LEVEL <--${NO_COLOR}" ; \
+        tree "$HOME"/.config/systemd/user)
+    }
+
+    # systemctl aliases
+    user_commands=(
+        cat
+        get-default
+        help
+        is-active
+        is-enabled
+        is-failed
+        is-system-running
+        list-dependencies
+        list-jobs
+        list-sockets
+        list-timers
+        list-unit-files
+        list-units
+        show
+        show-environment
+        status
+    )
+
+    sudo_commands=(
+        add-requires
+        add-wants
+        cancel
+        daemon-reexec
+        daemon-reload
+        default
+        disable
+        edit
+        emergency
+        enable
+        halt
+        import-environment
+        isolate
+        kexec
+        kill
+        link
+        list-machines
+        load
+        mask
+        preset
+        preset-all
+        reenable
+        reload
+        reload-or-restart
+        reset-failed
+        rescue
+        restart
+        revert
+        set-default
+        set-environment
+        set-property
+        start
+        stop
+        switch-root
+        try-reload-or-restart
+        try-restart
+        unmask
+        unset-environment
+    ) 
+
+    power_commands=(
+        hibernate
+        hybrid-sleep
+        poweroff
+        reboot
+        suspend
+    )
+
+    for c in $user_commands; do
+      alias "sc-$c"="systemctl $c"
+      alias "scu-$c"="systemctl --user $c"
+    done
+
+    for c in $sudo_commands; do
+      alias "sc-$c"="sudo systemctl $c"
+      alias "scu-$c"="systemctl --user $c"
+    done
+
+    for c in $power_commands; do
+      alias "sc-$c"="systemctl $c"
+    done
+
+    unset c user_commands sudo_commands power_commands
+
+    # --now commands
+    alias sc-enable-now="sc-enable --now"
+    alias sc-disable-now="sc-disable --now"
+    alias sc-mask-now="sc-mask --now"
+
+    alias scu-enable-now="scu-enable --now"
+    alias scu-disable-now="scu-disable --now"
+    alias scu-mask-now="scu-mask --now"
 fi
 
 if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
