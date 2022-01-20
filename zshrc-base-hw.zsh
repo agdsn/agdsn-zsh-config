@@ -500,8 +500,8 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     #WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
     WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
     GRML_NO_APT_ALIASES=1
-    HISTSIZE=300000
-    SAVEHIST=200000
+    HISTSIZE=2000000000
+    SAVEHIST=2000000000
 
     setopt hist_ignore_space
 
