@@ -2800,6 +2800,7 @@ fi
 
 if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
     alias l="command exa -l"
+    alias ls="command exa"
     alias la="command exa -la"
     alias lh="command exa -l"
     alias lt="command exa -lT"
