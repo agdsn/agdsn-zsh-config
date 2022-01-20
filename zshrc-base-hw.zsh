@@ -2592,6 +2592,7 @@ if is437; then
         zstyle ':prompt:grml(|-large|-chroot):right:setup' use-rprompt false
     elif (( EUID == 0 )); then
         zstyle ':prompt:grml(|-large|-chroot):*:items:user' pre '%B%F{red}'
+        zstyle ':prompt:hw:*:items:user' pre '%B%F{red}'
     fi
 
     # Finally enable one of the prompts.
