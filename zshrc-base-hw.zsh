@@ -2723,59 +2723,36 @@ if check_com -c screen ; then
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
+    alias g='git'
     alias ga='git add'
-    alias gapa='git add --patch'
-
-    alias gbs='git bisect'
-    alias gbsb='git bisect bad'
-    alias gbsg='git bisect good'
-    alias gbsr='git bisect reset'
-    alias gbss='git bisect start'
 
     alias gcl='git clone --recurse-submodules'
 
     alias gc='git commit -v'
-    alias gcmsg='git commit -m'
-
-    alias gco='git checkout'
-    alias gcor='git checkout --recurse-submodules'
-
-    alias gcp='git cherry-pick'
-    alias gcpa='git cherry-pick --abort'
-    alias gcpc='git cherry-pick --continue'
 
     alias gd='git diff'
     alias gds='git diff --staged'
 
-    alias glog='git log --oneline --decorate --graph'
-    alias gloga='git log --oneline --decorate --graph --all'
-    alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-    alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+    alias gp='git push'
+    alias gl='git pull --rebase=merges'
+
+    alias gsw='git switch'
+    alias gswc='git switch -c'
 
     alias gst='git status'
     alias gss='git status --short'
     alias gsb='git status --short --branch'
 
-    alias gsw='git switch'
-    alias gswc='git switch -c'
-
-    alias gp='git push'
-    alias gpd='git push --dry-run'
-    alias gpf='git push --force-with-lease'
-    alias gpoat='git push origin --all && git push origin --tags'
-
-    alias gpristine='git reset --hard && git clean -dffx'
-
-    alias grb='git rebase'
-    alias grba='git rebase --abort'
-    alias grbc='git rebase --continue'
-    alias grbi='git rebase --interactive'
+    alias glog='git log --oneline --decorate --graph'
+    alias gloga='git log --oneline --decorate --graph --all'
+    alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    alias glola="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 
     alias grs='git restore'
     alias grst='git restore --staged'
 
-    alias gup='git pull --rebase=merges'
-fi
+    alias gpristine='git reset --hard && git clean -dffx'
+ fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
     alias ip="command ip --color=auto"
