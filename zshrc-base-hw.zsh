@@ -2755,10 +2755,10 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
  fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
-    alias ip="command ip --color=auto"
-    alias ipb="command ip --color=auto --brief"
-    alias ip6="command ip --color=auto --family inet6"
-    alias ip6b="command ip --color=auto --family inet6 --brief"
+    alias ip="command ip -color"
+    alias ipb="command ip -color -brief"
+    alias ip6="command ip -color -family inet6"
+    alias ip6b="command ip -color -family inet6 -brief"
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
