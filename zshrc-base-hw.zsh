@@ -497,8 +497,7 @@ typeset -ga grep_options
 HW_CONF_DEFAULTS=${HW_CONF_DEFAULTS:-1}
 
 if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
-    #WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
-    WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+    WORDCHARS=''
     GRML_NO_APT_ALIASES=1
     HISTSIZE=2000000000
     SAVEHIST=2000000000
