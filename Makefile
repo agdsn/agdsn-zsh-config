@@ -1,4 +1,7 @@
-build: dev.PKGBUILD
+build:
+	makepkg -sirc -p PKGBUILD
+
+local: dev.PKGBUILD
 	makepkg -sirc -p dev.PKGBUILD
 
 dev.PKGBUILD: PKGBUILD
