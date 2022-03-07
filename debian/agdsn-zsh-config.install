@@ -1,0 +1,3 @@
+#!/usr/bin/dh-exec
+zshrc-home.zsh => etc/skel/.zshrc
+zshrc-base-hw.zsh => etc/zsh/zshrc-agdsn

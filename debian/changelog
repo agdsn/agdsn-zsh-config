@@ -1,0 +1,5 @@
+agdsn-zsh-config (0.4.0) bullseye; urgency=low
+
+  * Initial package release
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Mon, 07 Mar 2022 20:20:20 +0100

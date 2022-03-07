@@ -1,0 +1,8 @@
+#!/usr/bin/make -rRf
+%:
+	dh $@
+
+override_dh_installalternatives:
+	dh_installalternatives
+	# override the standard zshrc provided by the zsh-common package
+	sed -i 's|update-alternatives|update-alternatives --force|' debian/agdsn-zsh-config.postinst.debhelper

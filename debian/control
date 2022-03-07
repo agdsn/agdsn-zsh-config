@@ -1,0 +1,20 @@
+Source: agdsn-zsh-config
+Section: shells
+Priority: optional
+Maintainer: Hendrik Wolff <hendrik.wolff@agdsn.me>
+Uploaders: Hendrik Wolff <hendrik.wolff@agdsn.me>
+Build-Depends: debhelper (>=10)
+Standards-Version: 4.0.0
+Homepage: https://github.com/agdsn/agdsn-zsh-config
+Vcs-Browser: https://github.com/agdsn/agdsn-zsh-config
+Vcs-Git: https://github.com/agdsn/agdsn-zsh-config.git
+
+Package: agdsn-zsh-config
+Homepage: https://github.com/agdsn/agdsn-zsh-config
+Architecture: all
+Depends: zsh
+Enhances: systemd, iproute2, git
+Description: Modified Grml Zsh Config
+ A modified version of the Grml Zsh configuration
+ specialised for the needs of system administration and developed for the
+ residential network Arbeitsgemeinschaft Dresdner Studentennetz (AG DSN).
