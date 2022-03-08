@@ -1,0 +1,16 @@
+stages:  
+  - build
+
+debian-package:  
+  stage: build
+  image: debian:bullseye
+  script:
+    - apt install -y dh-make dh-exec
+    - dpkg-buildpackage -us -uc
+    - mkdir build
+    - mv ../agdsn-zsh-config*.deb build/
+
+  # The files which are to be made available in GitLab
+  artifacts:
+    paths:
+      - build/*
