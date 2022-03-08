@@ -5,6 +5,7 @@ debian-package:
   stage: build
   image: debian:bullseye
   script:
+    - apt update
     - apt install -y dh-make dh-exec
     - dpkg-buildpackage -us -uc
     - mkdir build
