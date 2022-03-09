@@ -5,6 +5,8 @@ BuildArch: noarch
 Summary: AG DSN Zsh Config for RPM based Linux distributions
 License: GPLv2
 
+Requires: zsh
+
 Enhances: zsh, systemd, iproute, git
 
 %description
