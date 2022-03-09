@@ -15,3 +15,14 @@ debian-package:
   artifacts:
     paths:
       - build/*
+
+rpm-package:
+  stage: build
+  image: rockylinux
+  script:
+    - dnf install -y rpm-build
+    - rpmbuild -bb rpm/agdsn-zsh-config.spec --define "_topdir $(pwd)/rpm/build" --define "_sourcedir $(pwd)"
+
+  artifacts:
+    paths:
+      - rpm/build/RPMS/noarch/*
