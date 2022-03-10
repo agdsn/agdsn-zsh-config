@@ -2507,7 +2507,7 @@ function prompt_grml-large_precmd () {
 }
 
 function hw_ip_netns_prompt () {
-    local NETNS=$(command ip netns identify)
+    local NETNS=$(command ip netns identify 2>/dev/null)
     if [[ -n "$NETNS" ]]; then
         # the variables are not existent when this prompt is displayed
         # local PROMPT="${MAGENTA}<${NO_COLOR}netns${YELLOW}:${GREEN}${NETNS}${MAGENTA}>${NO_COLOR} "
