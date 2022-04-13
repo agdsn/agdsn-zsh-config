@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.4.1) bullseye; urgency=low
+
+  * Fix setting grmls default HISTSIZE and SAVEHIST values
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Wed, 13 Apr 2022 14:00:00 +0200
+
 agdsn-zsh-config (0.4.0) bullseye; urgency=low
 
   * Initial package release

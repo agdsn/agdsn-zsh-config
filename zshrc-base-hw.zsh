@@ -1702,8 +1702,10 @@ function command_not_found_handler () {
 
 #v#
 HISTFILE=${HISTFILE:-${ZDOTDIR:-${HOME}}/.zsh_history}
+if [[ -z "$HW_CONF_DEFAULTS" ]]; then
 isgrmlcd && HISTSIZE=500  || HISTSIZE=5000
 isgrmlcd && SAVEHIST=1000 || SAVEHIST=10000 # useful for setopt append_history
+fi
 
 # dirstack handling
 

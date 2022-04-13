@@ -1,5 +1,5 @@
 Name: agdsn-zsh-config
-Version: 0.4.0
+Version: 0.4.1
 Release: 1%{?dist}
 BuildArch: noarch
 Summary: AG DSN Zsh Config for RPM based Linux distributions
