@@ -696,9 +696,8 @@ fi
 export PAGER=${PAGER:-less}
 
 if [[ -n "$HW_CONF_LESS_AS_READNULLCMD" ]]; then
-    function lessF() { less -F $@ }
-    export READNULLCMD=lessF
-    #unfunction lessF
+    function _less_F() { less -F $@ }
+    export READNULLCMD=_less_F
 fi
 
 #v#
