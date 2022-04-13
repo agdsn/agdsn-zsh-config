@@ -1,3 +1,5 @@
+### AG DSN Zsh Config
+
 # Filename:      /etc/skel/.zshrc
 # Purpose:       config file for zsh (z shell)
 # Authors:       (c) grml-team (grml.org)
