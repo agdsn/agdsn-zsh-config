@@ -519,6 +519,8 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     HW_CONF_NO_SUDO_SU=${HW_CONF_NO_SUDO_SU:-1}
     # uses exa for aliases instead of ls if exa exists
     HW_CONF_USE_EXA=${HW_CONF_USE_EXA:-1}
+    # uses less instead of more when redirecting directly to stdout
+    HW_CONF_LESS_AS_READNULLCMD=${HW_CONF_LESS_AS_READNULLCMD:-1}
 fi
 
 # Colors on GNU ls(1)
@@ -692,6 +694,12 @@ fi
 
 #v#
 export PAGER=${PAGER:-less}
+
+if [[ -n "$HW_CONF_LESS_AS_READNULLCMD" ]]; then
+    function lessF() { less -F $@ }
+    export READNULLCMD=lessF
+    #unfunction lessF
+fi
 
 #v#
 export MAIL=${MAIL:-/var/mail/$USER}
