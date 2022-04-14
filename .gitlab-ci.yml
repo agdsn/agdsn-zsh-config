@@ -44,6 +44,7 @@ rpm package:
 
 debian deploy:
   stage: deploy
+  needs: ["debian package"]
   script:
     - >
       curl --fail --insecure
@@ -55,6 +56,7 @@ debian deploy:
 
 rpm deploy:
   stage: deploy
+  needs: ["rpm package"]
   script:
     - >
       curl --fail --insecure
