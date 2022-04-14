@@ -22,8 +22,9 @@ rpm package:
   image: rockylinux:8
   script:
     - dnf install -y rpm-build
-    - rpmbuild -bb rpm/agdsn-zsh-config.spec \
-      --define "_topdir $(pwd)/rpm/build" \
+    - >
+      rpmbuild -bb rpm/agdsn-zsh-config.spec
+      --define "_topdir $(pwd)/rpm/build"
       --define "_sourcedir $(pwd)"
     - mkdir build
     - mv rpm/build/RPMS/noarch/agdsn-zsh-config*.rpm build/
@@ -44,9 +45,10 @@ rpm package:
 debian deploy:
   stage: deploy
   script:
-    - curl --fail --insecure \
-      -u $nexus_username:$nexus_password \
-      --upload-file build/agdsn-zsh-config*.deb \
+    - >
+      curl --fail --insecure
+      -u $nexus_username:$nexus_password
+      --upload-file build/agdsn-zsh-config*.deb
       https://nexus.agdsn.network:8443/repository/agdsn-apt/
   rules:
     - !reference [.deploy_rules, rules]
@@ -54,9 +56,10 @@ debian deploy:
 rpm deploy:
   stage: deploy
   script:
-    - curl --fail --insecure \
-      -u $nexus_username:$nexus_password \
-      --upload-file build/agdsn-zsh-config*.rpm \
+    - >
+      curl --fail --insecure
+      -u $nexus_username:$nexus_password
+      --upload-file build/agdsn-zsh-config*.rpm
       https://nexus.agdsn.network:8443/repository/agdsn-rpm/
   rules:
     - !reference [.deploy_rules, rules]
