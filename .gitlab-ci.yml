@@ -1,7 +1,7 @@
 stages:  
   - build
 
-debian-package:  
+debian package:  
   stage: build
   image: debian:bullseye
   script:
@@ -16,7 +16,7 @@ debian-package:
       - build/*
     expire_in: 1 week
 
-rpm-package:
+rpm package:
   stage: build
   image: rockylinux:8
   script:
