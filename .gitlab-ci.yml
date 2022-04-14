@@ -15,6 +15,7 @@ debian-package:
   artifacts:
     paths:
       - build/*
+    expire_in: 1 week
 
 rpm-package:
   stage: build
@@ -26,3 +27,4 @@ rpm-package:
   artifacts:
     paths:
       - rpm/build/RPMS/noarch/*
+    expire_in: 1 week
