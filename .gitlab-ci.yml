@@ -1,7 +1,8 @@
 stages:  
   - build
+  - deploy
 
-debian-package:  
+debian package:  
   stage: build
   image: debian:bullseye
   script:
@@ -10,19 +11,58 @@ debian-package:
     - dpkg-buildpackage -us -uc
     - mkdir build
     - mv ../agdsn-zsh-config*.deb build/
-
   # The files which are to be made available in GitLab
   artifacts:
     paths:
       - build/*
+    expire_in: 1 week
 
-rpm-package:
+rpm package:
   stage: build
-  image: rockylinux
+  image: rockylinux:8
   script:
     - dnf install -y rpm-build
-    - rpmbuild -bb rpm/agdsn-zsh-config.spec --define "_topdir $(pwd)/rpm/build" --define "_sourcedir $(pwd)"
-
+    - >
+      rpmbuild -bb rpm/agdsn-zsh-config.spec
+      --define "_topdir $(pwd)/rpm/build"
+      --define "_sourcedir $(pwd)"
+    - mkdir build
+    - mv rpm/build/RPMS/noarch/agdsn-zsh-config*.rpm build/
   artifacts:
     paths:
-      - rpm/build/RPMS/noarch/*
+      - build/*
+    expire_in: 1 week
+
+
+.deploy_rules:
+  rules:
+    # deploy only if the commit is on branch 'master' and 
+    # is tagged with a version (e.g. 'v0.1.2')
+    - if: >
+        ( $CI_COMMIT_BRANCH == "master"
+        && $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/ )
+
+debian deploy:
+  stage: deploy
+  needs: ["debian package"]
+  script:
+    - >
+      curl --fail --insecure
+      -u $nexus_username:$nexus_password
+      --upload-file build/agdsn-zsh-config*.deb
+      https://nexus.agdsn.network:8443/repository/agdsn-apt/
+  rules:
+    - !reference [.deploy_rules, rules]
+
+rpm deploy:
+  stage: deploy
+  needs: ["rpm package"]
+  script:
+    - >
+      curl --fail --insecure
+      -u $nexus_username:$nexus_password
+      --upload-file build/agdsn-zsh-config*.rpm
+      https://nexus.agdsn.network:8443/repository/agdsn-rpm/
+  rules:
+    - !reference [.deploy_rules, rules]
+
