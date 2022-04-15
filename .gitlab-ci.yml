@@ -44,9 +44,10 @@ debian deploy:
   needs: ["debian package"]
   script:
     - >
-      curl --fail --insecure
+      curl --fail
       -u $nexus_username:$nexus_password
-      --upload-file build/agdsn-zsh-config*.deb
+      -H "Content-Type: multipart/form-data"
+      --data-binary "@$(realpath build/agdsn-zsh-config*.deb)"
       https://nexus.agdsn.network:8443/repository/agdsn-apt/
   rules:
     - !reference [.deploy_rules, rules]
