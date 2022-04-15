@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.4.2) bullseye; urgency=low
+
+  * Set $READNULLCMD to `less -F`
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Wed, 14 Apr 2022 20:15:00 +0200
+
 agdsn-zsh-config (0.4.1) bullseye; urgency=low
 
   * Fix setting grmls default HISTSIZE and SAVEHIST values
