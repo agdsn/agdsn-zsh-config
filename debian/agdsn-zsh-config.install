@@ -1,3 +1,4 @@
 #!/usr/bin/dh-exec
 zshrc-home.zsh => etc/skel/.zshrc
 zshrc-base-hw.zsh => etc/zsh/zshrc-agdsn
+profile-d-agdsn-zsh-config.sh => etc/profile.d/agdsn-zsh-config.sh
