@@ -2,3 +2,8 @@ Name: zshrc
 Link: /etc/zsh/zshrc
 Alternative: /etc/zsh/zshrc-agdsn
 Priority: 50
+
+Name: newuser.zshrc.recommended
+Link: /etc/zsh/newuser.zshrc.recommended
+Alternative: /etc/zsh/newuser.zshrc.recommended-agdsn
+Priority: 50

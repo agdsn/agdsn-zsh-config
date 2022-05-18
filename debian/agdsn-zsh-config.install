@@ -1,4 +1,5 @@
 #!/usr/bin/dh-exec
 zshrc-home.zsh => etc/skel/.zshrc
+zshrc-home.zsh => etc/zsh/newuser.zshrc.recommended-agdsn
 zshrc-base-hw.zsh => etc/zsh/zshrc-agdsn
 profile-d-agdsn-zsh-config.sh => etc/profile.d/agdsn-zsh-config.sh

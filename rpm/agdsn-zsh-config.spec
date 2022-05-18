@@ -20,6 +20,7 @@ install -d -m 0755 %{buildroot}%{_sysconfdir}/skel
 install -d -m 0755 %{buildroot}%{_sysconfdir}/profile.d
 install -p -m 0644 %(pwd)/zshrc-base-hw.zsh %{buildroot}%{_sysconfdir}/zshrc-agdsn
 install -p -m 0644 %(pwd)/zshrc-home.zsh %{buildroot}%{_sysconfdir}/skel/.zshrc-agdsn
+install -p -m 0644 %(pwd)/zshrc-home.zsh %{buildroot}%{_sysconfdir}/zsh/newuser.zshrc.recommended
 install -p -m 0644 %(pwd)/profile-d-agdsn-zsh-config.sh %{buildroot}%{_sysconfdir}/profile.d/agdsn-zsh-config.sh
 # The dirty hack files
 install -p -m 0644 %(pwd)/rpm/install-agdsn-zshrc.sh %{buildroot}%{_sysconfdir}/install-agdsn-zshrc.sh
@@ -42,6 +43,7 @@ install -p -m 0644 %(pwd)/rpm/uninstall-agdsn-zshrc.sh %{buildroot}%{_sysconfdir
 
 %config %{_sysconfdir}/zshrc-agdsn
 %config %{_sysconfdir}/skel/.zshrc-agdsn
+%config %{_sysconfdir}/zsh/newuser.zshrc.recommended
 %config %{_sysconfdir}/profile.d/agdsn-zsh-config.sh
 
 %{_sysconfdir}/install-agdsn-zshrc.sh
