@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.5.1) bullseye; urgency=low
+
+  * Fix CI by adding profile-d-agdsn-zsh-config.sh
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Wed, 18 May 2022 23:57:21 +0200
+
 agdsn-zsh-config (0.5.0) bullseye; urgency=low
 
   * Remove ls=exa alias
