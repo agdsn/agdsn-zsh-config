@@ -926,14 +926,21 @@ function grmlcomp () {
     fi
 
     # host completion
+    _etc_hosts=()
+    _ssh_config_hosts=()
+    _ssh_hosts=()
     if is42 ; then
-        [[ -r ~/.ssh/config ]] && _ssh_config_hosts=(${${(s: :)${(ps:\t:)${${(@M)${(f)"$(<$HOME/.ssh/config)"}:#Host *}#Host }}}:#*[*?]*}) || _ssh_config_hosts=()
-        [[ -r ~/.ssh/known_hosts ]] && _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*}) || _ssh_hosts=()
-        [[ -r /etc/hosts ]] && [[ "$NOETCHOSTS" -eq 0 ]] && : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(grep -v '^0\.0\.0.\0\|^127\.0\.0\.1\|^::1 ' /etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}} || _etc_hosts=()
-    else
-        _ssh_config_hosts=()
-        _ssh_hosts=()
-        _etc_hosts=()
+        if [[ -r ~/.ssh/config ]] ; then
+            _ssh_config_hosts=(${${(s: :)${(ps:\t:)${${(@M)${(f)"$(<$HOME/.ssh/config)"}:#Host *}#Host }}}:#*[*?]*})
+        fi
+
+        if [[ -r ~/.ssh/known_hosts ]] ; then
+            _ssh_hosts=(${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[\|]*}%%\ *}%%,*})
+        fi
+
+        if [[ -r /etc/hosts ]] && [[ "$NOETCHOSTS" -eq 0 ]] ; then
+            : ${(A)_etc_hosts:=${(s: :)${(ps:\t:)${${(f)~~"$(grep -v '^0\.0\.0\.0\|^127\.0\.0\.1\|^::1 ' /etc/hosts)"}%%\#*}##[:blank:]#[^[:blank:]]#}}}
+        fi
     fi
 
     local localname
@@ -2817,8 +2824,8 @@ fi
 
 if [[ ! ( -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ) ]]; then
 # use ip from iproute2 with color support
-if ip --color=auto addr show dev lo >/dev/null 2>&1; then
-    alias ip='command ip --color=auto'
+if ip -color=auto addr show dev lo >/dev/null 2>&1; then
+    alias ip='command ip -color=auto'
 fi
 fi
 
