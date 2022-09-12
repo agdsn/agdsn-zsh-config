@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.6.0) bullseye; urgency=medium
+
+  * Apply updates from grml-etc-core
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Mon, 12 Sep 2022 13:50:00 +0200
+
 agdsn-zsh-config (0.5.1) bullseye; urgency=low
 
   * Fix CI by adding profile-d-agdsn-zsh-config.sh
