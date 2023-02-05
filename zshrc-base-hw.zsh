@@ -509,6 +509,7 @@ if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
     # the HW_CONF_ALIASES_* only take effect if this is enabled
     HW_CONF_ALIASES=${HW_CONF_ALIASES:-1}
     HW_CONF_ALIASES_GIT=${HW_CONF_ALIASES_GIT:-1}
+    HW_CONF_ALIASES_GIT_AUTHOR_REMINDER=${HW_CONF_ALIASES_GIT_AUTHOR_REMINDER:-1}
     HW_CONF_ALIASES_IPROUTE=${HW_CONF_ALIASES_IPROUTE:-1}
     HW_CONF_ALIASES_SYSTEMD=${HW_CONF_ALIASES_SYSTEMD:-1}
     # disables complicated and unintuitive ls aliases
@@ -2737,6 +2738,31 @@ if check_com -c screen ; then
             fi
         fi
     fi
+fi
+
+if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; then
+    function hw_git_reminder() {
+        if (( EUID == 0 )); then
+            if [[ -n "$GIT_AUTHOR_NAME" && -n "$GIT_AUTHOR_EMAIL" ]]; then
+                command git "$@"
+            elif [[ -n "$SUDO_USER" ]]; then
+                local fullname=$(getent passwd $SUDO_USER | cut -d: -f5)
+                local email="root+${SUDO_USER}@$(hostname -f)"
+                # do not overwrite already defined variables
+                local GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:-${fullname}}
+                local GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-${email}}
+                command git "$@"
+            else
+                echo "Your git author name or email could not be determined."
+                echo "Please use sudo in order to avoid this message."
+                echo "Or set GIT_AUTHOR_NAME and GIT_AUTHOR_EMAIL."
+                false
+            fi
+        else
+            command git "$@"
+        fi
+    }
+    alias git=hw_git_reminder
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
