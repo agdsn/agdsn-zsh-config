@@ -2741,8 +2741,8 @@ if check_com -c screen ; then
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; then
-    function hw_git_reminder() {
-        if (( EUID == 0 )); then
+    if (( EUID == 0 )); then
+        function hw_git_reminder() {
             if [[ -n "$GIT_AUTHOR_NAME" && -n "$GIT_AUTHOR_EMAIL" ]]; then
                 command git "$@"
             elif [[ -n "$SUDO_USER" ]]; then
@@ -2758,11 +2758,9 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; the
                 echo "Or set GIT_AUTHOR_NAME and GIT_AUTHOR_EMAIL."
                 false
             fi
-        else
-            command git "$@"
-        fi
-    }
-    alias git=hw_git_reminder
+        }
+        alias git=hw_git_reminder
+    fi
 fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
