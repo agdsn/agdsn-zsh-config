@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.7.0) bullseye; urgency=low
+
+  * Alias hw_git_reminder function to git
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Wed, 23 Aug 2023 21:56:23 +0200
+
 agdsn-zsh-config (0.6.0) bullseye; urgency=medium
 
   * Apply updates from grml-etc-core
