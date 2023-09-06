@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.7.1) bullseye; urgency=low
+
+  * Fix the git reminder
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Wed, 06 Sep 2023 22:03:29 +0200
+
 agdsn-zsh-config (0.7.0) bullseye; urgency=low
 
   * Alias hw_git_reminder function to git
