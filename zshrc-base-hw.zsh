@@ -2797,7 +2797,7 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
     alias grst='git restore --staged'
 
     alias gpristine='git reset --hard && git clean -dffx'
- fi
+fi
 
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
     alias ip="command ip -color"
