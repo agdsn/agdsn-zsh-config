@@ -2743,23 +2743,27 @@ fi
 if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; then
     if (( EUID == 0 )); then
         function hw_git_reminder() {
-            if [[ -n "$GIT_AUTHOR_NAME" && -n "$GIT_AUTHOR_EMAIL" ]]; then
+            if [[ -n "$GIT_AUTHOR_NAME" && -n "$GIT_AUTHOR_EMAIL" && -n "$GIT_COMMITTER_NAME" && -n "$GIT_COMMITTER_EMAIL" ]]; then
                 command git "$@"
             elif [[ -n "$SUDO_USER" ]]; then
                 local fullname=$(getent passwd $SUDO_USER | cut -d: -f5)
+                fullname="${fullname:-${SUDO_USER}}"
                 local email="root+${SUDO_USER}@$(hostname -f)"
                 # do not overwrite already defined variables
-                local GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:-${fullname}}
-                local GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-${email}}
+                export GIT_AUTHOR_NAME=${GIT_AUTHOR_NAME:-${fullname}}
+                export GIT_AUTHOR_EMAIL=${GIT_AUTHOR_EMAIL:-${email}}
+                export GIT_COMMITTER_NAME=${GIT_COMMITTER_NAME:-${fullname}}
+                export GIT_COMMITTER_EMAIL=${GIT_COMMITTER_EMAIL:-${email}}
                 command git "$@"
             else
-                echo "Your git author name or email could not be determined."
-                echo "Please use sudo in order to avoid this message."
-                echo "Or set GIT_AUTHOR_NAME and GIT_AUTHOR_EMAIL."
+                echo "Your git user name or email could not be determined."
+                echo "Please use \`sudo -i\` in order to avoid this message,"
+                echo "or set GIT_AUTHOR_NAME, GIT_AUTHOR_EMAIL, GIT_COMMITTER_NAME and GIT_COMMITTER_EMAIL."
                 false
             fi
         }
         alias git=hw_git_reminder
+        compdef hw_git_reminder=git
     fi
 fi
 
