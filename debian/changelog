@@ -1,3 +1,11 @@
+agdsn-zsh-config (0.8.0) bullseye; urgency=low
+
+  * Change systemctl aliases
+    Introduce `ssc` alias for a prepended `sudo ` to systemctl if user is not root.
+    `sc` is now just `systemctl` without a prepended `sudo `.
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Sat, 28 Oct 2023 16:21:42 +0200
+
 agdsn-zsh-config (0.7.1) bullseye; urgency=low
 
   * Fix the git reminder
