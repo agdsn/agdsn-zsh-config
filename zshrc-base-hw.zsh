@@ -2816,8 +2816,9 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
         tree "$HOME"/.config/systemd/user)
     }
 
-    salias "sc"="systemctl"
-    alias "scu"="systemctl --user"
+    salias ssc="systemctl"
+    alias sc="systemctl"
+    alias scu="systemctl --user"
 fi
 
 if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
