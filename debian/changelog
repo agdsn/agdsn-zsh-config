@@ -1,3 +1,9 @@
+agdsn-zsh-config (0.9.0) bullseye; urgency=low
+
+  * Enable HW_CONF* features only if the variables contain 1
+
+ -- Hendrik Wolff <hendrik.wolff@agdsn.me>  Sat, 02 Dec 2023 18:36:48 +0100
+
 agdsn-zsh-config (0.8.0) bullseye; urgency=low
 
   * Change systemctl aliases
