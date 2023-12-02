@@ -496,9 +496,11 @@ typeset -ga ls_options
 typeset -ga grep_options
 
 # HW_CONF
+# Set any HW_CONF* variable to not 1 to disable it.
+# Only "1" means the variable is enabled.
 HW_CONF_DEFAULTS=${HW_CONF_DEFAULTS:-1}
 
-if [[ -n "$HW_CONF_DEFAULTS" ]] ; then
+if [[ 1 == "$HW_CONF_DEFAULTS" ]]; then
     WORDCHARS=''
     GRML_NO_APT_ALIASES=1
     HISTSIZE=2000000000
@@ -696,7 +698,7 @@ fi
 #v#
 export PAGER=${PAGER:-less}
 
-if [[ -n "$HW_CONF_LESS_AS_READNULLCMD" ]]; then
+if [[ 1 == "$HW_CONF_LESS_AS_READNULLCMD" ]]; then
     export LESS="${LESS:--FR}"
     export READNULLCMD=less
 fi
@@ -1717,7 +1719,7 @@ function command_not_found_handler () {
 
 #v#
 HISTFILE=${HISTFILE:-${ZDOTDIR:-${HOME}}/.zsh_history}
-if [[ -z "$HW_CONF_DEFAULTS" ]]; then
+if [[ 1 != "$HW_CONF_DEFAULTS" ]]; then
 isgrmlcd && HISTSIZE=500  || HISTSIZE=5000
 isgrmlcd && SAVEHIST=1000 || SAVEHIST=10000 # useful for setopt append_history
 fi
@@ -2614,7 +2616,7 @@ if is437; then
     fi
 
     # Finally enable one of the prompts.
-    if [[ -n "$HW_CONF_HW_PROMPT" ]]; then
+    if [[ 1 == "$HW_CONF_HW_PROMPT" ]]; then
         prompt hw
     elif [[ -n $GRML_CHROOT ]]; then
         prompt grml-chroot
@@ -2740,7 +2742,7 @@ if check_com -c screen ; then
     fi
 fi
 
-if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; then
+if [[ 1 == "$HW_CONF_ALIASES" && 1 == "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; then
     if (( EUID == 0 )); then
         function hw_git_reminder() {
             if [[ -n "$GIT_AUTHOR_NAME" && -n "$GIT_AUTHOR_EMAIL" && -n "$GIT_COMMITTER_NAME" && -n "$GIT_COMMITTER_EMAIL" ]]; then
@@ -2767,7 +2769,7 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT_AUTHOR_REMINDER" ]]; the
     fi
 fi
 
-if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
+if [[ 1 == "$HW_CONF_ALIASES" && 1 == "$HW_CONF_ALIASES_GIT" ]]; then
     alias g='git'
     alias ga='git add'
 
@@ -2799,14 +2801,14 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_GIT" ]]; then
     alias gpristine='git reset --hard && git clean -dffx'
 fi
 
-if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ]]; then
+if [[ 1 == "$HW_CONF_ALIASES" && 1 == "$HW_CONF_ALIASES_IPROUTE" ]]; then
     alias ip="command ip -color"
     alias ipb="command ip -color -brief"
     alias ip6="command ip -color -family inet6"
     alias ip6b="command ip -color -family inet6 -brief"
 fi
 
-if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
+if [[ 1 == "$HW_CONF_ALIASES" && 1 == "$HW_CONF_ALIASES_SYSTEMD" ]]; then
     function listd() {
         local BOLD="\e[01m"
         echo -e "${BOLD}${RED} --> SYSTEM LEVEL <--${NO_COLOR}"
@@ -2821,7 +2823,7 @@ if [[ -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_SYSTEMD" ]]; then
     alias scu="systemctl --user"
 fi
 
-if [[ -n "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
+if [[ 1 == "$HW_CONF_USE_EXA" && -x $(whence exa) ]]; then
     alias l="command exa -l"
     alias la="command exa -la"
     alias lh="command exa -l"
@@ -2851,7 +2853,7 @@ else
     alias l='command ls -l'
 fi
 
-if [[ ! ( -n "$HW_CONF_ALIASES" && -n "$HW_CONF_ALIASES_IPROUTE" ) ]]; then
+if [[ 1 != "$HW_CONF_ALIASES" || 1 != "$HW_CONF_ALIASES_IPROUTE" ]]; then
 # use ip from iproute2 with color support
 if ip -color=auto addr show dev lo >/dev/null 2>&1; then
     alias ip='command ip -color=auto'
@@ -2864,7 +2866,7 @@ fi
 
 alias ...='cd ../../'
 
-if [[ -n "$HW_CONF_ALIASES" ]]; then
+if [[ 1 == "$HW_CONF_ALIASES" ]]; then
     alias ....='cd ../../../'
     alias diff='diff --color=auto'
 fi
@@ -3011,7 +3013,7 @@ if [[ -r /etc/debian_version ]] ; then
     fi
 
     # get a root shell as normal user in live-cd mode:
-    if isgrmlcd && [[ $UID -ne 0 ]] && [[ -z "$HW_CONF_NO_SUDO_SU" ]] ; then
+    if isgrmlcd && [[ $UID -ne 0 ]] && [[ 1 != "$HW_CONF_NO_SUDO_SU" ]]; then
        alias su="sudo su"
     fi
 
@@ -3601,7 +3603,7 @@ esac
 #a2# Execute \kbd{du -sch}
 [[ -n "$GRML_NO_SMALL_ALIASES" ]] || alias da='du -sch'
 
-if [[ ! ( -n "$HW_CONF_DISABLE_ADVANCED_LS_ALIASES" ) ]]; then
+if [[ 1 != "$HW_CONF_DISABLE_ADVANCED_LS_ALIASES" ]]; then
 # listing stuff
 #a2# Execute \kbd{ls -lSrah}
 alias dir="command ls -lSrah"
